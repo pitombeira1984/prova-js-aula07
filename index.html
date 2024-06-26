@@ -47,7 +47,7 @@
         </select>
         <button type="button" onclick="handleClick()">Calcular</button>
     </form>
-    <h2>GORJETA:<span id="result"></span></h2>
+    <h2>GORJETA: R$ <span id="result"></span></h2>
     </div>
     <script>
         // Função de conversão de temperatura com callback
@@ -63,7 +63,8 @@
                     callback(resultado);
                     break;
                 case "ruim":
-                    resultado = 'ZERO, Avaliação Ruim. Gorjeta não Merecida';
+                    resultado = (vlr * 0);
+                    alert('Avaliação Ruim. Gorjeta não Merecida')
                     callback(resultado);
                     break;    
                 default:
@@ -72,7 +73,7 @@
             }
         }        
         const displayResult = (resultado) => {
-            document.getElementById('result').textContent = resultado;
+            document.getElementById('result').textContent = resultado.toFixed(2);
         }        
         const handleClick = () => {
             const vlr = parseFloat(document.getElementById('vlr').value);
