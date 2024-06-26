@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUNÇÕES DE CALLBACK_Calculadora de Gorjeta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        form {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Gorjeta</h1>
+    <form id="form">
+        <label for="vlr">Insira o Valor Total da Conta</label>
+        <input type="number" name="vlr" id="vlr">
+        <label for="qlt">Escolha a Qualidade do Serviço:</label>
+        <select name="qlt" id="qlt">
+            <option value="bom">Bom</option>
+            <option value="regular">Regular</option>
+            <option value="ruim">Ruim</option>
+        </select>
+        <button type="button" onclick="handleClick()">Calcular</button>
+    </form>
+    <h2>GORJETA:<span id="result"></span></h2>
+    </div>
+    <script>
+        // Função de conversão de temperatura com callback
+        const calcularQualidade = (vlr, qlt, callback) => {
+            let resultado;
+            switch(qlt) {
+                case "bom":
+                    resultado = (vlr * 0.1);
+                    callback(resultado);
+                    break;
+                case "regular":
+                    resultado = (vlr * 0.05);
+                    callback(resultado);
+                    break;
+                case "ruim":
+                    resultado = 'ZERO, Avaliação Ruim. Gorjeta não Merecida';
+                    callback(resultado);
+                    break;    
+                default:
+                    alert('Operação Inválida!');
+                    return;
+            }
+        }        
+        const displayResult = (resultado) => {
+            document.getElementById('result').textContent = resultado;
+        }        
+        const handleClick = () => {
+            const vlr = parseFloat(document.getElementById('vlr').value);
+            const qlt = document.getElementById('qlt').value;
+            
+            calcularQualidade(vlr, qlt, displayResult);
+        }
+    </script>
+</body>
+</html>
